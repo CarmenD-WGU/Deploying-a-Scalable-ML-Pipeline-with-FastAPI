@@ -1,7 +1,12 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-# TODO: add necessary import
+
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+from joblib import dump
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -19,8 +24,26 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-   # TODO: implement the function
-    pass
+
+    # Define the model
+    model = LogisticRegression()
+
+    # Define the hyperparameters to tune
+    hyperparameters = {'C': [0.1, 1, 10, 100],
+                       'penalty': ['l2']}
+
+    # Use a cross-validation grid search to tune the hyperparameters
+
+    grid_search = GridSearchCV(model, hyperparameters, cv=5)
+    grid_search.fit(X_train, y_train)
+
+    dump(model, f"model/model.joblib")
+    dump(encoder, f"model/encoder.joblib")
+    dump(lb, f"model/lb.joblib")
+
+    # Return the best performing model from the grid search
+    return grid_search.best_estimator_
+
 
 
 def compute_model_metrics(y, preds):
@@ -50,7 +73,7 @@ def inference(model, X):
 
     Inputs
     ------
-    model : ???
+    model : sklearn.linear_model
         Trained machine learning model.
     X : np.array
         Data used for prediction.
@@ -59,8 +82,7 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    # TODO: implement the function
-    pass
+    return model.predict(X)
 
 def save_model(model, path):
     """ Serializes model to a file.
@@ -107,7 +129,7 @@ def performance_on_categorical_slice(
         Trained sklearn OneHotEncoder, only used if training=False.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained sklearn LabelBinarizer, only used if training=False.
-    model : ???
+    model : sklearn.linear_model
         Model used for the task.
 
     Returns
@@ -117,12 +139,16 @@ def performance_on_categorical_slice(
     fbeta : float
 
     """
-    # TODO: implement the function
-    X_slice, y_slice, _, _ = process_data(
-        # your code here
-        # for input data, use data in column given as "column_name", with the slice_value 
-        # use training = False
+    # DONE?: implement the function
+    X_slice, y_slice, encoder, lb = process_data(
+        data[data[column_name] = slice_value],
+        categorical_features = categorical_features,
+        label = label,
+        training = False,
+        encoder = encoder,
+        lb = lb
     )
-    preds = # your code here to get prediction on X_slice using the inference function
+    
+    preds = model.predict(X_slice) #DONE? your code here to get prediction on X_slice using the inference function
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta
