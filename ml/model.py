@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
-from joblib import dump
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -36,10 +35,6 @@ def train_model(X_train, y_train):
 
     grid_search = GridSearchCV(model, hyperparameters, cv=5)
     grid_search.fit(X_train, y_train)
-
-    dump(model, f"model/model.joblib")
-    dump(encoder, f"model/encoder.joblib")
-    dump(lb, f"model/lb.joblib")
 
     # Return the best performing model from the grid search
     return grid_search.best_estimator_
@@ -94,13 +89,23 @@ def save_model(model, path):
     path : str
         Path to save pickle file.
     """
-    # TODO: implement the function
-    pass
+    with open(path, 'wb') as f:
+        pickle.dump(model, f)
+
+
 
 def load_model(path):
-    """ Loads pickle file from `path` and returns it."""
-    # TODO: implement the function
-    pass
+    """ Loads pickle file from `path` and returns it.
+    Inputs
+    ------
+    path : str
+        Path to pickle file for loading.
+    """
+
+    with open(path, 'rb') as f:
+        model = pickle.load(f)
+
+    return model
 
 
 def performance_on_categorical_slice(
