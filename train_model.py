@@ -38,7 +38,7 @@ cat_features = [
 X_train, y_train, encoder, lb = process_data(
     train,
     categorical_features = cat_features,
-    label = "salary"
+    label = "salary",
     training=True
     # do not need to pass encoder and lb as input
     )
@@ -87,9 +87,10 @@ for col in cat_features:
             categorical_features = cat_features,
             label =  "salary",
             encoder = encoder,
-            lb = lb
+            lb = lb,
+            model = model
             # use test, col and slicevalue as part of the input
         )
         with open("slice_output.txt", "a") as f:
-        print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
-        print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}", file=f)
+            print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
+            print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}", file=f)

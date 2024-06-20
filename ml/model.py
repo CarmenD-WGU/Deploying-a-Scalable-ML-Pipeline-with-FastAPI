@@ -25,7 +25,7 @@ def train_model(X_train, y_train):
     """
 
     # Define the model
-    model = LogisticRegression()
+    model = LogisticRegression(solver='lbfgs', max_iter=400)
 
     # Define the hyperparameters to tune
     hyperparameters = {'C': [0.1, 1, 10, 100],
