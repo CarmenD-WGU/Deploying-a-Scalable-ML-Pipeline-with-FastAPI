@@ -31,7 +31,7 @@ def cat_features():
 
 
 # DONE?: implement the third test. Change the function name and input as needed
-def test_data_existance():
+def test_data_existance(raw_data):
     """
     Check that the sahpe of the dataframe loaded has rows and the expected number of columns
 
@@ -41,9 +41,10 @@ def test_data_existance():
     RETURNS:
     nothing
     """
-    
-    assert raw_data.shape[0] > 0, "Dataframe contains no rows"
-    assert raw_data.shape[1] == 15, "Dataframe has incorrect number of columns"
+    df = raw_data
+
+    assert df.shape[0] > 0, "Dataframe contains no rows"
+    assert df.shape[1] == 15, "Dataframe has incorrect number of columns"
 
 
 
