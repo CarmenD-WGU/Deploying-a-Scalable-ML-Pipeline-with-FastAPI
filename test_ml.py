@@ -1,19 +1,52 @@
 import pytest
-# TODO: add necessary import
+import pandas as pd
+import numpy as np
+from ml.data import process_data
+from ml.model import 
 
-# TODO: implement the first test. Change the function name and input as needed
-def test_one():
+@pytest.fixture
+def test_ml_data():
+    return pd.read_csv("data/census.csv")
+
+@pytest.fixture
+def cat_features():
+    return [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
+
+
+# DONE?: implement the first test. Change the function name and input as needed
+def test_process_data(test_ml_data, cat_features):
     """
-    # add description for the first test
+    # Test to ensure the process_data function returns expected results
     """
-    # Your code here
-    pass
+    encoder = None
+    lb = None
+
+    X_temp, y_temp, encoder, lb = process_data(
+        test_ml_data,
+        categorical_features = cat_features,
+        label = "salary",
+        training=True
+    # do not need to pass encoder and lb as input
+    )
+    assert X_temp.shape[0] > 0, "X values array is empty"
+    assert y_temp.shape[0] > 0, "y values array is empty"
+    assert encoder is not None, "Did not produce trained OneHotEncoder"
+    assert lb is not None, "Did not produce trained LabelBinarizer"
 
 
 # TODO: implement the second test. Change the function name and input as needed
 def test_two():
     """
-    # add description for the second test
+    Test 
     """
     # Your code here
     pass

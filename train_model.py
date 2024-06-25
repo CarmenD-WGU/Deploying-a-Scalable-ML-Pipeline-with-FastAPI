@@ -70,7 +70,7 @@ model = load_model(
 ) 
 print("Model Loaded.")
 
-# TODO: use the inference function to run the model inferences on the test dataset.
+# DONE: use the inference function to run the model inferences on the test dataset.
 preds = model.predict(X_test)
 
 # Calculate and print the metrics
