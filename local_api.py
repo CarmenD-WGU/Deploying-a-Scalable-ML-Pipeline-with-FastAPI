@@ -26,25 +26,9 @@ data = {
     "capital-gain": 0,
     "capital-loss": 0,
     "hours-per-week": 40,
-    "native-country": "United-States",
+    "native-country": "United-States"
 }
 
-test_data = {
-    37,
-    "Private",
-    178356,
-    "HS-grad",
-    10,
-    "Married-civ-spouse",
-    "Prof-specialty",
-    "Husband",
-    "White",
-    "Male",
-    0,
-    0,
-    40,
-    "United-States",
-}
 
 # DONE?: send a POST using the data above
 r = requests.post(local_URL+"data?",
@@ -54,4 +38,4 @@ r = requests.post(local_URL+"data?",
 # DONE: print the status code
 print("Post request status code: ", r.status_code)
 # DONE: print the result
-print("Inferance result: ", r.json())
+print("Inference result: ", r.json())
