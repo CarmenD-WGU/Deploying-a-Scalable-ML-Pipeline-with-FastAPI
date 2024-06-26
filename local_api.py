@@ -29,9 +29,26 @@ data = {
     "native-country": "United-States",
 }
 
+test_data = {
+    37,
+    "Private",
+    178356,
+    "HS-grad",
+    10,
+    "Married-civ-spouse",
+    "Prof-specialty",
+    "Husband",
+    "White",
+    "Male",
+    0,
+    0,
+    40,
+    "United-States",
+}
+
 # DONE?: send a POST using the data above
 r = requests.post(local_URL+"data?",
-                         data=data)
+                         data = data)
 
 
 # DONE: print the status code
