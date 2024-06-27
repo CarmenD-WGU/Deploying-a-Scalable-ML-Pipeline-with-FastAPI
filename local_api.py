@@ -31,11 +31,12 @@ data = {
 
 
 # DONE?: send a POST using the data above
-r = requests.post(local_URL+"data?",
-                         data = data)
+#r = requests.post(local_URL+"data?",
+#                         data = data)
+r2 = requests.post(f'{local_URL}data', json=data)
 
 
 # DONE: print the status code
-print("Post request status code: ", r.status_code)
+print("Post request status code: ", r2.status_code)
 # DONE: print the result
-print("Inference result: ", r.json())
+print("Inference result: ", r2.json())
